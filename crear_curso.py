@@ -2,7 +2,7 @@ from informacion import Curso, Horario
 import re
 from util import Nombres_atributos, dias
 
-def establecer_horario(tabla, curso: Curso) -> None:
+def establecer_horario(tabla, curso: Curso, flag_ayudantia: bool) -> None:
     trs = tabla.find_all('tr', recursive=False)
     for i, tr in enumerate(trs[1:]):
         tds = tr.find_all('td', recursive=False)
@@ -11,9 +11,10 @@ def establecer_horario(tabla, curso: Curso) -> None:
             if resultado:
                 onmouse = resultado[0].get('onmouseover', '')
                 catedra = re.findall(r'\bCátedra\b', onmouse, flags=re.IGNORECASE)
-                if catedra:
+
+                if flag_ayudantia or (not flag_ayudantia and catedra):
                     dia = dias[j]
-                    bloque = i*2 +1
+                    bloque = i * 2 + 1
                     sala = re.search(r'Sala (\w+)', resultado[0].text).group(1)
                     horario = Horario()
                     horario.sala = sala

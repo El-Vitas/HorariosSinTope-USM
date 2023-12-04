@@ -2,6 +2,7 @@ import os
 
 from bs4 import BeautifulSoup as bs
 from informacion import Curso
+from util import cargar_html
 from crear_horario import crear_horario
 from crear_curso import obtener_curso, establecer_horario, crear_lista_cursos
 
@@ -40,17 +41,19 @@ def main():
     nombres_archivos = os.listdir(directorio_archivos)
     cursos: list[Curso] = []
 
+    flag_ayudantia = input("Ingresa 1 para considerar ayudantia. 0 Si no las quieres considerar:\n") == '1'
+
     for nombre_archivo in nombres_archivos:
         ruta_archivo = os.path.join(directorio_archivos, nombre_archivo)
-        with open(ruta_archivo, 'r', encoding='latin-1') as archivo:
-            html = archivo.read()
+        html = cargar_html(ruta_archivo)
         soup = bs(html, "lxml")
         tablas = soup.find_all('table')
         curso = obtener_curso(tablas[0])
-        establecer_horario(tablas[1], curso)
+        establecer_horario(tablas[1], curso, flag_ayudantia)
 
         cursos.append(curso)
 
+    
     lista_cursos = crear_lista_cursos(cursos)
     n = len(lista_cursos)
     pos = [0 for i in range(n)]
