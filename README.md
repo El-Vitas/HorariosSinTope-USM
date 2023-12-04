@@ -12,6 +12,6 @@
 ## Obtención de Archivos
 - Dirígete a Siga y accede a "Horario asignaturas".
 - Busca la asignatura deseada (puede tener varios paralelos) y haz clic en "Horario". Se abrirá una ventana.
-- Haz clic derecho sobre la tabla de horarios. Dependiendo del navegador, selecciona "Guardar marco como" o "Ver origen del marco". Descarga solo el HTML del marco, no de la página completa.
+- Haz clic derecho sobre la tabla de horarios. Dependiendo del navegador, selecciona "Guardar marco como" o "Ver origen de marco". Descarga solo el HTML del marco, no de la página completa.
 - Guarda los archivos HTML descargados en la carpeta `archivos`.
 
